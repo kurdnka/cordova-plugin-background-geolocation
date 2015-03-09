@@ -556,6 +556,13 @@
 {
     NSLog(@"- CDVBackgroundGeoLocation#sync");
     NSLog(@"  type: %@, position: %@,%@ speed: %@", [data objectForKey:@"location_type"], [data objectForKey:@"latitude"], [data objectForKey:@"longitude"], [data objectForKey:@"speed"]);
+    
+    // GINA: we're not interested in such inaccurate values
+    if ([[data objectForKey:@"accuracy"] doubleValue] > 50.0) {
+        [self stopBackgroundTask];
+        return;
+    }
+    
     if (isDebugging) {
         [self notify:[NSString stringWithFormat:@"Location update: %s\nSPD: %0.0f | DF: %ld | ACY: %0.0f",
                       ((isMoving) ? "MOVING" : "STATIONARY"),
