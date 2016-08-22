@@ -5,7 +5,6 @@
 //
 #import "CDVLocation.h"
 #import "CDVBackgroundGeoLocation.h"
-#import <Cordova/CDVJSON.h>
 
 // Debug sounds for bg-geolocation life-cycle events.
 // http://iphonedevwiki.net/index.php/AudioServices
@@ -62,7 +61,7 @@
 @synthesize syncCallbackId;
 @synthesize stationaryRegionListeners;
 
-- (void)pluginInitialize
+- (void) pluginInitialize
 {
     // background location cache, for when no network is detected.
     locationManager = [[CLLocationManager alloc] init];
